@@ -1,4 +1,5 @@
 from user import User
+from event import post_event
 
 class UserDatabase:
     def __init__(self):
@@ -6,10 +7,11 @@ class UserDatabase:
         self.current_user = None
         
     
-    def create_user(self, name, password):
-        u = User(name, password)
+    def create_user(self, name, email, password):
+        u = User(name, email, password)
         self._users.append(u)
         self.current_user = u
+        post_event("USER_REGISTERED", u)
     
     
     def logout(self):

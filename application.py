@@ -65,8 +65,9 @@ class Application:
     
     def user_signin(self):
         name = input('Please enter your full name: ')
+        email = input('Please enter your email: ')
         password = input('Please enter your password: ')
-        self.user_database.create_user(name, password)
+        self.user_database.create_user(name, email, password)
         self.is_signed_in = True
         self.verification()
         
