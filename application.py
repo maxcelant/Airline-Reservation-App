@@ -2,12 +2,14 @@ from time import sleep
 import os 
 
 from userdb import UserDatabase
+from flight import FlightDatabase
 
 class Application:
     
     is_signed_in: bool
     
     def __init__(self):
+        self.flight_database = FlightDatabase()
         self.user_database = UserDatabase()
         self.is_signed_in = False
         
@@ -24,6 +26,14 @@ class Application:
             self.main_menu()
                     
         if not self.is_signed_in:
+            
+            current_user = self.user_database.get_user()
+            if not current_user:
+                choice = input(f'Would you like to sign in as {current_user.email}? [Y/y]: ')
+                if choice.lower() == 'y':
+                    self.user_signin()
+                    return
+                
             choice = input('You are not signed in, Would you like to? [Y/y] to Sign In: ')
             if choice.lower() == 'y':
                 self.user_signin()
@@ -56,7 +66,8 @@ class Application:
 
     
     def view_flights(self):
-        pass
+        os.system('clear')
+        self.flight_database.show_flights()
     
     
     def join_flight(self):

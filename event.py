@@ -1,3 +1,8 @@
+'''
+    We are using the 'Listener' Design Pattern here to simplify
+    our code and de-couple it from the main application
+'''
+
 
 subscribers = dict()
 
